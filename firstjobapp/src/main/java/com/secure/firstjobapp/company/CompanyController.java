@@ -36,8 +36,29 @@ public class CompanyController {
     @PostMapping
     public ResponseEntity<String> addCompany(@RequestBody Company company){
         companyService.createCompany(company);
-        return new ResponseEntity<>("Job created successfully",
+        return new ResponseEntity<>("Company created successfully",
                                             HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteCompany(@PathVariable Long id){
+        boolean deleted = companyService.deleteCompanyById(id);
+        if(deleted){
+            return new ResponseEntity<>("Company deleted successfully",
+                                                        HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>("Company Not Found ",HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Company> getCompanyById(@PathVariable Long id){
+        Company company = companyService.getCompanyById(id);
+        if(company!=null){
+            return new ResponseEntity<>(company,HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
 

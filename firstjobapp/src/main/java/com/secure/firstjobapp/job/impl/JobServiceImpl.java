@@ -49,13 +49,13 @@ public class JobServiceImpl implements JobService {
     public boolean updateJobById(Long id, Job updatedJob) {
         Optional<Job> optionalJob = jobRepository.findById(id);
             if(optionalJob.isPresent()){
-                Job j = optionalJob.get();
-                j.setTitle(updatedJob.getTitle());
-                j.setDescription(updatedJob.getDescription());
-                j.setMinSalary(updatedJob.getMinSalary());
-                j.setMaxSalary(updatedJob.getMaxSalary());
-                j.setLocation(updatedJob.getLocation());
-                jobRepository.save(j);
+                Job jobToUpdate = optionalJob.get();
+                jobToUpdate.setTitle(updatedJob.getTitle());
+                jobToUpdate.setDescription(updatedJob.getDescription());
+                jobToUpdate.setMinSalary(updatedJob.getMinSalary());
+                jobToUpdate.setMaxSalary(updatedJob.getMaxSalary());
+                jobToUpdate.setLocation(updatedJob.getLocation());
+                jobRepository.save(jobToUpdate);
                 return true;
             }
 
